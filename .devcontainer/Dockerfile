@@ -1,0 +1,19 @@
+FROM ghcr.io/mamba-org/micromamba
+
+USER root
+
+# Install Quarto and Git
+RUN curl -LO https://quarto.org/download/latest/quarto-linux-amd64.deb
+RUN apt-get update && \
+    apt-get install -y --non-interactive quarto-linux-amd64.deb \
+    apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
+
+USER mambauser
+
+RUN micromamba create -n quarto-env python=3.10 -c conda-forge -y
+SHELL ["micromamba", "run", "-n", "quarto-env", "/bin/bash", "-c"]
+
+RUN micromamba install jupyterlab matplotlib plotly -c conda-forge -y
+
+SHELL ["/bin/bash", "-c"]
