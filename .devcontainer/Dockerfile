@@ -14,6 +14,6 @@ USER mambauser
 RUN micromamba create -n quarto-env python=3.10 -c conda-forge -y
 SHELL ["micromamba", "run", "-n", "quarto-env", "/bin/bash", "-c"]
 
-RUN micromamba install jupyterlab matplotlib plotly -c conda-forge -y
+RUN micromamba install jupyterlab matplotlib plotly pandas -c conda-forge -y
 
 SHELL ["/bin/bash", "-c"]
