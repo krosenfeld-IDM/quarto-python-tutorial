@@ -3,10 +3,10 @@ FROM ghcr.io/mamba-org/micromamba
 USER root
 
 # Install Quarto and Git
-RUN wget https://quarto.org/download/latest/quarto-linux-amd64.deb
 RUN apt-get update && \
-    apt-get install -y --non-interactive quarto-linux-amd64.deb \
-    apt-get install -y git && \
+    apt-get install -y git curl && \
+    curl -LO https://quarto.org/download/latest/quarto-linux-amd64.deb && \
+    apt-get install -y --non-interactive quarto-linux-amd64.deb && \
     rm -rf /var/lib/apt/lists/*
 
 USER mambauser
